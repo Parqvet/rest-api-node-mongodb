@@ -9,7 +9,7 @@ import MongoClient from "mongodb";
 // client.db('')
 
 // como la conexion es un proceso asincrono podria usar una promesa o async await
-export async function conect() {
+export async function connect() {
     try {
         // como client va a tomar algo de tiempo le voy a decir await
         const client = await MongoClient.connect('mongodb://localhost:27017', {
