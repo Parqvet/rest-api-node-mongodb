@@ -12,8 +12,11 @@ import MongoClient from "mongodb";
 export async function conect() {
     try {
         // como client va a tomar algo de tiempo le voy a decir await
-        const client = await MongoClient.connect('mongodb://localhost:27017');
+        const client = await MongoClient.connect('mongodb://localhost:27017', {
+            useUnifiedTopology: true
+        });
         const db = client.db('node-restapi');
+        console.log('DB is connected');
         return db;
     } catch(e) {
         console.log(e);

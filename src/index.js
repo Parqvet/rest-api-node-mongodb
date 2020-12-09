@@ -1,3 +1,5 @@
+// starting the server
+
 import app from './server';
 
 async function main() {
