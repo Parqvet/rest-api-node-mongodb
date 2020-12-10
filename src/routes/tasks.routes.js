@@ -44,4 +44,16 @@ router.get('/:id', async (req, res) => {
     res.json(result)
 })
 
+router.delete('/:id', async (req, res) => {
+    const { id } = req.params;
+    const db = await connect();
+
+    // desde la coleccion de tareas vamos a eliminar algun dato por su id
+    const result = await db.collection('tasks').deleteOne({_id: ObjectID(id)});
+    res.json({
+        message: `Task ${id} deleted`,
+        result
+    });
+})
+
 export default router;
