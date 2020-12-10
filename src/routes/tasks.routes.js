@@ -17,4 +17,17 @@ router.get('/', async (req, res) => {
     res.json(result);
 })
 
+router.post('/', async (req, res) => {
+    const db = await connect();
+    
+    const task = {
+        title: req.body.title,
+        description: req.body.description
+    };
+    // una vez guardado los datos, genero una consulta a la db
+    // antes de crear algo le tenemos que decir a que coleccion se lo vamos a asignar, luego guardamos la tarea
+    const result = await db.collection('tasks').insertOne(task);
+    res.json(result.ops[0]);
+})
+
 export default router;
