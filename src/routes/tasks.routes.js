@@ -15,7 +15,6 @@ router.get('/', async (req, res) => {
     // de esta coleccion queremos que busque todos los datos que existen, find
     // esto me va a retornar un resultado, lo guardo en una constante
     const result = await db.collection('tasks').find({}).toArray();
-    console.log(result);
     // respondemos con un json con los datos de result
     res.json(result);
 })
@@ -54,6 +53,19 @@ router.delete('/:id', async (req, res) => {
         message: `Task ${id} deleted`,
         result
     });
+})
+
+router.put('/:id', async (req, res) => {
+    const { id } = req.params;
+    const updateTask = {
+        title: req.body.title,
+        description: req.body.description
+    };
+    const db = await connect();
+    await db.collection('tasks').updateOne({_id: ObjectID(id)}, {$set: updateTask});
+    res.json({
+        message: `Task ${id} Updated`
+    })
 })
 
 export default router;
